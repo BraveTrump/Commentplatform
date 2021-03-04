@@ -17,9 +17,14 @@
         mode="horizontal"
         @select="handleSelect"
       >
-        <el-menu-item index="1">首页</el-menu-item>
-        <el-menu-item index="2">发现</el-menu-item>
-        <el-menu-item index="2">话题</el-menu-item>
+        <el-menu-item index="1"></el-menu-item>
+        <el-menu-item index="2"></el-menu-item>
+        <el-menu-item index="3"></el-menu-item>
+        <el-menu-item index="4"></el-menu-item>
+        <el-menu-item index="5"></el-menu-item>
+        <el-menu-item index="6"></el-menu-item>
+        <el-menu-item index="7"></el-menu-item>
+        <el-menu-item index="8"></el-menu-item>
       </el-menu>
       <el-input
         size="small"
@@ -29,8 +34,8 @@
       >
         <el-button slot="append" icon="el-icon-search"></el-button>
       </el-input>
-      <el-button size="small" type="primary" @click="askModelVisible = true">
-        提问
+      <el-button type="primary" @click="askModelVisible = true">
+        评一评
       </el-button>
 
       <div class="userInfo" v-if="!isLogin">

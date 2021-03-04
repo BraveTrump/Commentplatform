@@ -14,9 +14,6 @@
         <el-form-item prop="name" class="no-label">
           <el-input placeholder="请输入用户名" v-model="registerForm.name" />
         </el-form-item>
-        <el-form-item prop="email" class="no-label">
-          <el-input placeholder="请输入邮箱" v-model="registerForm.email" />
-        </el-form-item>
         <el-form-item prop="password" class="no-label">
           <el-input
             type="password"
@@ -41,14 +38,6 @@
           </el-button>
         </el-form-item>
       </el-form>
-      <div class="footer register-footer">
-        <span>
-          注册即代表同意
-          <a href="#">《Fake协议》</a>
-          <a href="#">《隐私保护指引》</a>
-        </span>
-        <a href="#">注册机构号</a>
-      </div>
     </div>
 
     <!-- 登录表单 -->
@@ -60,7 +49,7 @@
         label-width="0px"
       >
         <el-form-item prop="username" class="no-label">
-          <el-input placeholder="手机号或邮箱" v-model="loginForm.username" />
+          <el-input placeholder="请输入账号" v-model="loginForm.username" />
         </el-form-item>
         <el-form-item prop="password" class="no-label">
           <el-input
@@ -70,7 +59,7 @@
           />
         </el-form-item>
         <div class="others">
-          <span></span>
+          <span @click="returnhome">以游客身份登陆</span>
           <span>忘记密码？</span>
         </div>
         <el-form-item prop="submit">
@@ -176,6 +165,9 @@ export default {
     };
   },
   methods: {
+    returnhome: function() {
+      this.$router.push({ name: "home" });
+    },
     async register() {
       await request
         .post("/users/create", {

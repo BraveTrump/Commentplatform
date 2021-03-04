@@ -14,7 +14,7 @@
         v-show="!replyShow"
         v-if="!deleteShow"
       >
-        <span class="el el-icon-fakezhihu-reply"></span>回复
+        <span class="el el-icon-reply"></span>回复
       </el-button>
       <el-button
         class="btn-text-gray"
@@ -24,7 +24,7 @@
         v-show="replyShow"
         v-if="!deleteShow"
       >
-        <span class="el el-icon-fakezhihu-reply"></span>取消回复
+        <span class="el el-icon-reply"></span>取消回复
       </el-button>
       <el-button
         class="btn-text-gray hover-hidden"
@@ -42,14 +42,14 @@
         v-show="item.subComments.length !== 0"
         @click="commentListShow = true"
       >
-        <span class="el el-icon-fakezhihu-Chat"></span>查看回复
+        <span class="el el-icon-Chat"></span>查看回复
       </el-button>
       <el-button class="btn-text-gray hover-hidden" size="medium" type="text">
         {{ JSON.parse(activeStatus.voteDown).length }}
-        <span class="el el-icon-fakezhihu-dislike"></span>踩
+        <span class="el el-icon-dislike"></span>踩
       </el-button>
       <el-button class="btn-text-gray hover-hidden" size="medium" type="text">
-        <span class="el el-icon-fakezhihu-flug"></span>举报
+        <span class="el el-icon-flug"></span>举报
       </el-button>
     </div>
     <el-card class="comment m-b-15" v-if="commentListShow">
