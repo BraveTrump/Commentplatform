@@ -35,25 +35,7 @@
         type="text"
         @click="displayComments"
       >
-        <span class="el el-icon-fakezhihu-comment"></span>评论
-      </el-button>
-      <el-button
-        v-if="showActionItems.indexOf('comment') >= 0"
-        class="btn-text-gray m-l-25"
-        size="medium"
-        type="text"
-      >
-        <span class="el-el-icon-fakezhihu-comment"></span>
-        {{ comment_count }} 条评论
-      </el-button>
-      <el-button
-        v-if="showActionItems.indexOf('share') >= 0"
-        class="btn-text-gray m-l-25"
-        size="medium"
-        type="text"
-        icon="el-icon-share"
-      >
-        分享
+        <span class="el el-icon-comment"></span>{{ comment_count }}评论
       </el-button>
       <el-button
         v-if="showActionItems.indexOf('favorite') >= 0"
@@ -71,27 +53,9 @@
         type="text"
         @click="updateStatus('thanks')"
       >
-        <span class="el el-icon-fakezhihu-heart"></span>
+        <span class="el el-icon-heart"></span>
         {{ thanksCountText }}
       </el-button>
-      <el-dropdown
-        v-if="showActionItems.indexOf('more') >= 0"
-        placement="bottom"
-        class="m-l-25"
-      >
-        <el-button
-          class="btn-text-gray"
-          size="medium"
-          type="text"
-          icon="el-icon-more"
-        ></el-button>
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item>没有帮助</el-dropdown-item>
-          <el-dropdown-item>举报</el-dropdown-item>
-          <el-dropdown-item>申请授权</el-dropdown-item>
-          <el-dropdown-item>不感兴趣</el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
       <el-dropdown
         v-if="showActionItems.includes('setting') && activeUser"
         placement="bottom"
