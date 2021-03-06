@@ -1,11 +1,13 @@
 <template>
   <div class="wrapper">
     <div class="icon-item normal-btn" v-if="exists.indexOf('question') >= 0">
-      <i class="el-icon-tickets big-icon"></i>
-      <p>水一水</p>
+      <router-link :to="{ name: 'editor', params: { articleId: 0 } }">
+        <i class="el-icon-tickets big-icon"></i>
+        <p>水一水</p>
+      </router-link>
     </div>
     <div class="icon-item normal-btn" v-if="exists.indexOf('article') >= 0">
-      <router-link :to="{ name: 'editor', params: { articleId: 0 } }">
+      <router-link :to="{ name: 'courseEditor', params: { articleId: 0 } }">
         <i class="el-icon-edit-outline big-icon"></i>
         <p>发评价</p>
       </router-link>

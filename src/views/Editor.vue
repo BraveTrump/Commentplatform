@@ -2,24 +2,6 @@
   <div class="editor">
     <editor-header @release-articles="releaseArticles" />
     <div class="content m-t-50">
-      <el-upload
-        v-show="imgUrl === ''"
-        class="img-upload m-b-15"
-        drag
-        action="/imgs/upload"
-        :on-success="uploadSuc"
-        accept=".jpg, .jpeg, .JPG, .png, .PNG"
-      >
-        <i class="el-icon-upload"></i>
-        <div ref="hiddenUpload">添加图片</div>
-      </el-upload>
-      <img
-        v-show="imgUrl !== ''"
-        class="oldImg m-b-15"
-        :src="imgUrl"
-        @click="$refs.hiddenUpload.click()"
-      />
-
       <el-input
         v-model="title"
         class="m-b-15"

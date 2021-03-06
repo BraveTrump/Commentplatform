@@ -7,7 +7,7 @@
         size="medium"
         type="text"
       >
-        <span class="el el-icon-fakezhihu-fire"></span>
+        <span class="el el-icon-fire"></span>
         {{ metrics_area.text }}
       </el-button>
       <el-button

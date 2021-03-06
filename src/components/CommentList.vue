@@ -43,11 +43,6 @@ export default {
     this.getComments();
   },
   methods: {
-    /**
-     * 这个方法是获取一经评论的内容
-     * 1. 问题的一级评论
-     * 2. 答案的一级评论
-     */
     async getComments() {
       this.loading = true;
       await request

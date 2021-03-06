@@ -1,30 +1,14 @@
 <template>
   <div>
     <div class="comment-actions">
-      <el-button class="btn-text-gray" size="medium" type="text">
+      <el-button class="btn-text-gray hover-hidden" size="medium" type="text">
         {{ /* activeStatus 为跨组件 v-bind="$attrs" 获取的属性 */ }}
-        <span class="el el-icon-fakezhihu-like"></span>
+        <span class="el el-icon-like"></span>赞
         {{ JSON.parse(activeStatus.voteUp).length }}
       </el-button>
-      <el-button
-        class="btn-text-gray hover-hidden"
-        size="medium"
-        type="text"
-        @click="replyShow = true"
-        v-show="!replyShow"
-        v-if="!deleteShow"
-      >
-        <span class="el el-icon-reply"></span>回复
-      </el-button>
-      <el-button
-        class="btn-text-gray"
-        size="medium"
-        type="text"
-        @click="replyShow = false"
-        v-show="replyShow"
-        v-if="!deleteShow"
-      >
-        <span class="el el-icon-reply"></span>取消回复
+      <el-button class="btn-text-gray hover-hidden" size="medium" type="text">
+        {{ JSON.parse(activeStatus.voteDown).length }}
+        <span class="el el-icon-dislike"></span>踩
       </el-button>
       <el-button
         class="btn-text-gray hover-hidden"
@@ -34,22 +18,6 @@
         @click="deleteComment"
       >
         <i class="el-icon-delete"></i>删除
-      </el-button>
-      <el-button
-        class="btn-text-gray hover-hidden"
-        size="medium"
-        type="text"
-        v-show="item.subComments.length !== 0"
-        @click="commentListShow = true"
-      >
-        <span class="el el-icon-Chat"></span>查看回复
-      </el-button>
-      <el-button class="btn-text-gray hover-hidden" size="medium" type="text">
-        {{ JSON.parse(activeStatus.voteDown).length }}
-        <span class="el el-icon-dislike"></span>踩
-      </el-button>
-      <el-button class="btn-text-gray hover-hidden" size="medium" type="text">
-        <span class="el el-icon-flug"></span>举报
       </el-button>
     </div>
     <el-card class="comment m-b-15" v-if="commentListShow">

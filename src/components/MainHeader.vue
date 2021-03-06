@@ -35,7 +35,7 @@
         <el-button slot="append" icon="el-icon-search"></el-button>
       </el-input>
       <el-button type="primary" @click="askModelVisible = true">
-        评一评
+        光速打分
       </el-button>
 
       <div class="userInfo" v-if="!isLogin">

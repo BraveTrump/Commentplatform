@@ -5,11 +5,13 @@ import Main from "../views/Main.vue";
 import ListItem from "../components/ListItem.vue";
 import SignUp from "../views/SignUp.vue";
 import Editor from "../views/Editor.vue";
+import courseEditor from "../views/courseEditor.vue";
 import DetailsArticle from "../views/DetailsArticle.vue";
 import DetailsQuestion from "../views/DetailsQuestion.vue";
 import ListItemHot from "../components/ListItemHot.vue";
 import People from "../views/People.vue";
 import AsksItem from "../components/AsksItem.vue";
+import giveScore from "../components/giveScore";
 
 Vue.use(VueRouter);
 
@@ -76,6 +78,16 @@ const routes = [
     path: "/editor/:articleId",
     name: "editor",
     component: Editor
+  },
+  {
+    path: "/courseEditor/:articleId",
+    name: "courseEditor",
+    component: courseEditor
+  },
+  {
+    path: "/giveScore",
+    name: "giveScore",
+    component: giveScore
   },
   {
     path: "/about",
