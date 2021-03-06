@@ -106,7 +106,7 @@ export default {
     };
 
     const validatePassEnsure = (rule, value, callback) => {
-      if (value == "") {
+      if (value === "") {
         callback(new Error("请再次输入密码"));
       } else if (value !== this.registerForm.password) {
         callback(new Error("两次输入密码不一致"));
@@ -192,8 +192,9 @@ export default {
           pwd: md5(this.loginForm.password)
         })
         .then(res => {
-          if (res.status == 200) {
+          if (res.status === 200) {
             this.$message.success("登录成功");
+            this.console(res.status);
             this.$router.push({ name: "home" });
           } else {
             this.$message.error(res.data.msg);

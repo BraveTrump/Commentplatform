@@ -1,7 +1,7 @@
 <template>
   <header class="main-header">
     <el-dialog
-      title="新的问题"
+      title="评分"
       :visible.sync="askModelVisible"
       :modal-append-to-body="false"
     >
@@ -52,15 +52,12 @@
           <el-dropdown-menu slot="dropdown">
             <!-- 若不使用native修饰符，无法获取到组件内部的内容，单击也会因此无效 -->
             <el-dropdown-item @click.native="goToPersonalPage">
-              <span class="el el-icon-fakezhihu-person"></span>
+              <span class=""></span>
               我的主页
             </el-dropdown-item>
             <el-dropdown-item divided>
-              <i class="el-icon-setting">设置</i>
-            </el-dropdown-item>
-            <el-dropdown-item divided>
               <div @click="logout">
-                <span class="el el-icon-fakezhihu-poweroff"></span>
+                <span class="el el-icon-poweroff"></span>
                 退出
               </div>
             </el-dropdown-item>
@@ -83,7 +80,7 @@ export default {
       activeIndex: "1",
       keywords: "",
       isLogin: false,
-      name: "",
+      name: "yyc",
       askModelVisible: false,
       avatarUrl: ""
     };
