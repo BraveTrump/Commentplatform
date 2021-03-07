@@ -3,7 +3,7 @@
     <img src="./../assets/imgs/logo.png" alt="" />
     <p class="slogen">课程交流</p>
 
-    <!-- 登录表单 -->
+    <!-- 注册表单 -->
     <div class="register" v-show="nowStatus === 'register'">
       <el-form
         :model="registerForm"
@@ -27,6 +27,9 @@
             placeholder="请再次输入密码"
             v-model="registerForm.passwordEnsure"
           />
+        </el-form-item>
+        <el-form-item prop="email" class="no-label">
+          <el-input placeholder="请输入邮箱" v-model="registerForm.email" />
         </el-form-item>
         <el-form-item prop="submit">
           <el-button
@@ -59,8 +62,8 @@
           />
         </el-form-item>
         <div class="others">
-          <span @click="returnhome">以游客身份登陆</span>
-          <span>忘记密码？</span>
+          <a href="" @click="returnhome">以游客身份登陆</a>
+          <a href="">忘记密码？</a>
         </div>
         <el-form-item prop="submit">
           <el-button
@@ -89,7 +92,7 @@
 </template>
 
 <script>
-import request from "@/service";
+//import request from "@/service";
 import md5 from "md5";
 
 export default {
@@ -106,7 +109,7 @@ export default {
     };
 
     const validatePassEnsure = (rule, value, callback) => {
-      if (value === "") {
+      if (value == "") {
         callback(new Error("请再次输入密码"));
       } else if (value !== this.registerForm.password) {
         callback(new Error("两次输入密码不一致"));
@@ -158,7 +161,7 @@ export default {
       },
       loginRules: {
         username: [
-          { required: true, message: "请输入用户名或邮箱", trigger: "blur" }
+          { required: true, message: "请输入用户名", trigger: "blur" }
         ],
         password: [{ required: true, message: "请输入密码", trigger: "blur" }]
       }
@@ -168,36 +171,35 @@ export default {
     returnhome: function() {
       this.$router.push({ name: "home" });
     },
-    async register() {
-      await request
+    register: function() {
+      this.$axios
         .post("/users/create", {
-          name: this.registerForm.name,
-          pwd: md5(this.registerForm.password),
-          email: this.registerForm.email
+          userName: this.registerForm.name,
+          userPwd: md5(this.registerForm.password),
+          userEmail: this.registerForm.email
         })
         .then(res => {
           // 201-已创建
-          if (res.status === 201) {
+          if (res.data.status === 201) {
             this.$message.success("注册成功");
             this.$router.push({ name: "home" });
           } else {
-            this.$message.error(res.data.msg);
+            this.$message.error(res.data.message);
           }
         });
     },
-    async login() {
-      await request
+    login: function() {
+      this.$axios
         .post("/users/login", {
-          name: this.loginForm.username,
-          pwd: md5(this.loginForm.password)
+          userName: this.loginForm.username,
+          userPwd: md5(this.loginForm.password)
         })
         .then(res => {
-          if (res.status === 200) {
+          if (res.data.status === 200) {
             this.$message.success("登录成功");
-            this.console(res.status);
             this.$router.push({ name: "home" });
           } else {
-            this.$message.error(res.data.msg);
+            this.$message.error(res.data.message);
           }
         });
     },

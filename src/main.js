@@ -7,8 +7,17 @@ import "./assets/styles/main.scss";
 import "quill/dist/quill.core.css";
 import "quill/dist/quill.snow.css";
 import "quill/dist/quill.bubble.css";
-//import "./mock/target.js";
 import CommentList from "@/components/CommentList";
+// import "./mock/target";
+
+// 设置反向代理，前端请求默认发送到 http://localhost:3000/comment_platform
+var axios = require("axios");
+axios.defaults.baseURL = "http://localhost:3000/comment_platform";
+//跨域请求携带cookie
+axios.defaults.withCredentials = true;
+// 全局注册，之后可在其他组件中通过 this.$axios 发送数据
+Vue.prototype.$axios = axios;
+Vue.config.productionTip = false;
 
 Vue.component("CommentList", CommentList);
 

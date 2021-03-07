@@ -1,28 +1,18 @@
 <template>
-  <div class="giveScore">
-    <el-select
-      v-model="value"
-      multiple
-      filterable
-      remote
-      reserve-keyword
-      placeholder="ÇëÊäÈë¹Ø¼ü´Ê"
-      :remote-method="remoteMethod"
-      :loading="loading"
+  <div class="giveScore" id="giveScore">
+    <el-option
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value"
     >
-      <el-option
-        v-for="item in options"
-        :key="item.value"
-        :label="item.label"
-        :value="item.value"
-      >
-      </el-option>
-    </el-select>
+    </el-option>
   </div>
 </template>
 
 <script>
 export default {
+  name: "giveScore",
   data() {
     return {
       options: [],

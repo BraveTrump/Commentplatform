@@ -1,5 +1,5 @@
 <template>
-  <div class="editor">
+  <div class="courseEditor">
     <editor-header @release-articles="releaseArticles" />
     <div class="content m-t-50">
       <el-input
@@ -8,15 +8,33 @@
         size="medium"
         placeholder="请输入标题（最多50个字）"
       />
-      <el-select v-model="course" filterable placeholder="请选择课程">
-        <el-option
-          v-for="item in options"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
-        >
-        </el-option>
-      </el-select>
+      <el-row gutter="20">
+        <el-col :span="8">
+          <el-select
+            v-model="value"
+            filterable
+            placeholder="请选择课程"
+            @command="HandleCourse"
+          >
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :course="item.label"
+              :value="item.label"
+            >
+            </el-option>
+          </el-select>
+        </el-col>
+        <el-col :span="12">
+          <el-select v-model="score" placeholder="请选择分数">
+            <el-option :score="1" value="1分">1分</el-option>
+            <el-option :score="2" value="2分">2分</el-option>
+            <el-option :score="3" value="3分">3分</el-option>
+            <el-option :score="4" value="4分">4分</el-option>
+            <el-option :score="5" value="5分">5分</el-option>
+          </el-select>
+        </el-col>
+      </el-row>
       <rich-text-editor
         ref="textEditor"
         :content="content"
@@ -43,8 +61,7 @@ export default {
       contentText: "", // 纯文本
       placeHolder: "请输入正文",
       course: "",
-      courseList: [],
-      state: "",
+      score: 0,
       imgUrl: "", // 题图url
       options: [
         {
@@ -75,13 +92,16 @@ export default {
       this.getArticleInfo();
     }
   },
-
   methods: {
+    HandleScore(command) {
+      this.score = command;
+    },
     /* 跳转并传值 */
     handleIconClick(ev) {
       console.log(ev);
     }
   },
+
   uploadSuc(response) {
     this.imgUrl = `${imgDec}${response.fileName}`;
   },

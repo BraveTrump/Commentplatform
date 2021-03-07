@@ -69,7 +69,7 @@
 </template>
 
 <script>
-import request from "@/service";
+//import request from "@/service";
 import AskModel from "./AskModel.vue";
 import { getCookies } from "@/lib/utils";
 
@@ -89,25 +89,26 @@ export default {
     this.checkLogin();
   },
   methods: {
-    async checkLogin() {
-      await request.get("/users/checkLogin").then(res => {
-        if (res.status === 200) {
-          this.name = res.data.name;
-          this.avatarUrl = res.data.avatarUrl;
+    checkLogin: function() {
+      this.$axios.get("/users/checkLogin").then(res => {
+        if (res.data.status === 200) {
+          this.name = res.data.data.userName;
+          // this.avatarUrl = res.data.avatarUrl;
           this.isLogin = true;
         } else {
-          this.$router.push({ name: "signup" });
+          // this.$router.push({ name: "signup" });
           this.isLogin = false;
         }
       });
     },
-    async logout() {
-      await request.post("/users/logout").then(res => {
+    logout: function() {
+      this.$axios.post("/users/logout").then(res => {
         if (res.status === 200) {
           this.$message.success("注销成功");
           this.name = "";
           this.avatarUrl = "";
-          this.$router.push({ name: "signup" });
+          this.isLogin = false;
+          // this.$router.push({ name: "signup" });
         } else {
           this.$message.error("注销失败，请稍后再试");
         }
@@ -117,7 +118,8 @@ export default {
       console.log(key);
     },
     goToPersonalPage() {
-      this.$router.push(`/people/${getCookies("id")}`);
+      this.$router.push(`/people/${getCookies("user")}`);
+      // this.$router.push(`/people/1`);
     },
     changeAskModelVisible(status) {
       this.askModelVisible = status;
