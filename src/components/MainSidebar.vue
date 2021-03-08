@@ -1,11 +1,10 @@
 <template>
   <div>
+    <user-info></user-info>
     <el-card class="no-padding m-b-15">
       <icon-buttons :exists="['question', 'article', 'thinking']" />
     </el-card>
-    <el-card class="no-padding m-b-15">
-      <icon-buttons :exists="['live', 'book', 'desk', 'expert', 'consult']" />
-    </el-card>
+
     <el-card class="no-padding m-b-15">
       <div class="nav-link">
         <a href="#">
@@ -49,11 +48,13 @@
 <script>
 import IconButtons from "./IconButtons.vue";
 import SidebarFooter from "./SidebarFooter.vue";
+import UserInfo from "./UserInfo.vue";
 
 export default {
   components: {
     IconButtons,
-    SidebarFooter
+    SidebarFooter,
+    UserInfo
   }
 };
 </script>

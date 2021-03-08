@@ -37,6 +37,7 @@ export default {
     return {
       score: 0,
       labelCourse: "",
+      labelScore: "",
       options: [
         {
           value: "选项1",
