@@ -78,8 +78,8 @@ export default {
     return {
       activeIndex: "1",
       keywords: "",
-      isLogin: true,
-      name: "yyc",
+      isLogin: false,
+      name: "",
       askModelVisible: false,
       avatarUrl: ""
     };
@@ -92,7 +92,7 @@ export default {
       this.$axios.get("/users/checkLogin").then(res => {
         if (res.data.status === 200) {
           this.name = res.data.data.userName;
-          //this.avatarUrl = res.data.avatarUrl;
+          this.avatarUrl = res.data.avatarUrl;
           this.isLogin = true;
         } else {
           this.$router.push({ name: "signup" });

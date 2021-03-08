@@ -8,15 +8,31 @@
         size="medium"
         placeholder="请输入标题（最多50个字）"
       />
-      <el-select v-model="course" filterable placeholder="请选择课程">
-        <el-option
-          v-for="option in options"
-          :key="option.courseID"
-          :label="option.courseName"
-          :value="option"
-        >
-        </el-option>
-      </el-select>
+      <el-row gutter="20">
+        <el-col :span="8">
+          <el-select v-model="course" filterable placeholder="请选择课程">
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :labelCourse="item.label"
+              :value="item.label"
+            >
+            </el-option>
+          </el-select>
+        </el-col>
+        <el-col :span="12">
+          <el-select v-model="score" placeholder="请选择分数">
+            <el-option :score="1" value="1分">1分</el-option>
+            <el-option :score="2" value="2分">2分</el-option>
+            <el-option :score="3" value="3分">3分</el-option>
+            <el-option :score="4" value="4分">4分</el-option>
+            <el-option :score="5" value="5分">5分</el-option>
+          </el-select>
+        </el-col>
+        <el-col :span="4">
+          <el-button type="primary" round v-on:click="submit">提交</el-button>
+        </el-col>
+      </el-row>
       <rich-text-editor
         ref="textEditor"
         :content="content"
@@ -40,12 +56,13 @@ export default {
     return {
       name: "",
       id: 0,
-      isLogin: true,
+      isLogin: false,
       title: "", // 标题
       content: "", // 富文本
       contentText: "", // 纯文本
       placeHolder: "请输入正文",
-      course: [],
+      course: "",
+      score: 0,
       courseList: [],
       state: "",
       imgUrl: "", // 题图url

@@ -196,6 +196,7 @@ export default {
         .then(res => {
           if (res.data.status === 200) {
             this.$message.success("登录成功");
+            this.returnhome();
           } else {
             this.$message.error(res.data.message);
           }

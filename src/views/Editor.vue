@@ -52,7 +52,7 @@ export default {
         if (res.data.status === 200) {
           this.name = res.data.data.userName;
           this.id = res.data.data.userID;
-          this.isLogin = true;
+          this.isLogin = false;
         } else {
           this.$router.push({ name: "signup" });
           this.isLogin = false;
