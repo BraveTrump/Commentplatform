@@ -92,7 +92,6 @@
 </template>
 
 <script>
-//import request from "@/service";
 import md5 from "md5";
 
 export default {
@@ -197,7 +196,6 @@ export default {
         .then(res => {
           if (res.data.status === 200) {
             this.$message.success("登录成功");
-            this.$router.push({ name: "home" });
           } else {
             this.$message.error(res.data.message);
           }

@@ -21,27 +21,44 @@
 <script>
 import EditorHeader from "../components/EditorHeader.vue";
 import RichTextEditor from "../components/RichTextEditor.vue";
-import request from "@/service";
-import { getCookies } from "@/lib/utils";
+//import request from "@/service";
+//import { getCookies } from "@/lib/utils";
 import { imgDec } from "@/lib/config.js";
 
 export default {
   components: { EditorHeader, RichTextEditor },
   data() {
     return {
+      name: "",
+      id: 0,
+      isLogin: true,
       title: "", // 标题
       content: "", // 富文本
       contentText: "", // 纯文本
       placeHolder: "请输入正文",
+      state: "",
       imgUrl: "" // 题图url
     };
   },
   mounted() {
+    this.checkLogin();
     if (parseFloat(this.$route.params.articleId) !== 0) {
       this.getArticleInfo();
     }
   },
   methods: {
+    checkLogin: function() {
+      this.$axios.get("/users/checkLogin").then(res => {
+        if (res.data.status === 200) {
+          this.name = res.data.data.userName;
+          this.id = res.data.data.userID;
+          this.isLogin = true;
+        } else {
+          this.$router.push({ name: "signup" });
+          this.isLogin = false;
+        }
+      });
+    },
     uploadSuc(response) {
       this.imgUrl = `${imgDec}${response.fileName}`;
     },
@@ -50,33 +67,34 @@ export default {
       this.contentText = contentText;
     },
     releaseArticles() {
-      if (parseFloat(this.$route.params.articleId) !== 0) {
-        this.updateArticle();
-      } else {
-        this.createArticle();
-      }
+      // if (parseFloat(this.$route.params.articleId) !== 0) {
+      //   this.updateArticle();
+      // } else {
+      this.createArticle();
+      // }
     },
-    async createArticle() {
-      await request
-        .post("/articles", {
-          content: this.content,
-          excerpt: this.contentText.slice(0, 100),
+    createArticle: function() {
+      this.$axios
+        .post("/articleUnmarked", {
           title: this.title,
-          imgUrl: this.imgUrl,
-          userId: getCookies("id")
+          content: this.contentText,
+          user: { userID: this.id },
+          likes: 0,
+          hates: 0,
+          thanks: 0
         })
         .then(res => {
-          if (res.data.status === 201) {
+          if (res.data.status === 200) {
             this.$message.success("新建成功！");
             this.$router.push({
               path: `/article/${res.data.id}`
             });
           } else {
-            this.$message.error(res.error);
+            this.$message.error(res.data.message);
           }
         });
-    },
-    async getArticleInfo() {
+    }
+    /*async getArticleInfo() {
       await request
         .get("/articles", {
           articleId: this.$route.params.articleId
@@ -114,7 +132,7 @@ export default {
             });
           }
         });
-    }
+    }*/
   }
 };
 </script>
