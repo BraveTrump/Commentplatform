@@ -21,23 +21,25 @@
 </template>
 
 <script>
-import request from "@/service";
+//import request from "@/service";
 
 export default {
   data() {
     return {
       name: "",
+      id: 0,
       isLogin: false
     };
   },
   mounted() {
-    this.checkLogin();
+    // this.checkLogin();
   },
   methods: {
-    async checkLogin() {
-      await request.get("/users/checkLogin").then(res => {
-        if (res.status === 200) {
-          this.name = res.data.name;
+    checkLogin: function() {
+      this.$axios.get("/users/checkLogin").then(res => {
+        if (res.data.status === 200) {
+          this.name = res.data.data.userName;
+          this.id = res.data.data.userID;
           this.isLogin = true;
         } else {
           this.$router.push({ name: "signup" });

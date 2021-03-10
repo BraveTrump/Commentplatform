@@ -6,10 +6,10 @@
     <div class="hotItem-content">
       <a :href="item.target.link.url">
         <h2 class="hotItem-title">
-          {{ item.target.title_area.text }}
+          {{ item.title }}
         </h2>
         <p class="hotItem-excerpt hotItem-excerpt-multiLine">
-          {{ item.target.excerpt_area.text }}
+          {{ item.content }}
         </p>
       </a>
       <list-item-actions

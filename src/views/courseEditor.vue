@@ -10,7 +10,12 @@
       />
       <el-row gutter="20">
         <el-col :span="8">
-          <el-select v-model="course" filterable placeholder="请选择课程">
+          <el-select
+            v-model="value"
+            filterable
+            placeholder="请选择课程"
+            @command="HandleCourse"
+          >
             <el-option
               v-for="item in options"
               :key="item.value"
@@ -63,7 +68,6 @@ export default {
       placeHolder: "请输入正文",
       course: "",
       score: 0,
-      courseList: [],
       state: "",
       imgUrl: "", // 题图url
       options: []

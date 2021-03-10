@@ -69,8 +69,9 @@
 </template>
 
 <script>
-import AskModel from "./AskModel.vue";
-import { getCookies } from "@/lib/utils";
+//import request from "@/service";
+import AskModel from "./QuickScore.vue";
+//import { getCookies } from "@/lib/utils";
 
 export default {
   components: { AskModel },
@@ -95,7 +96,7 @@ export default {
           this.avatarUrl = res.data.avatarUrl;
           this.isLogin = true;
         } else {
-          this.$router.push({ name: "signup" });
+          //this.$router.push({ name: "signup" });
           this.isLogin = false;
         }
       });
@@ -107,7 +108,7 @@ export default {
           this.name = "";
           this.avatarUrl = "";
           this.isLogin = false;
-          this.$router.push({ name: "signup" });
+          this.$router.push({ name: "home" });
         } else {
           this.$message.error("注销失败，请稍后再试");
         }
@@ -117,8 +118,8 @@ export default {
       console.log(key);
     },
     goToPersonalPage() {
-      this.$router.push(`/people/${getCookies("user")}`);
-      // this.$router.push(`/people/1`);
+      // this.$router.push(`/people/${getCookies("id")}`);
+      this.$router.push(`/people/1`);
     },
     changeAskModelVisible(status) {
       this.askModelVisible = status;

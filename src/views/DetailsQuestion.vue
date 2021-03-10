@@ -206,7 +206,7 @@
 <script>
 import request from "@/service";
 import { getCookies } from "@/lib/utils";
-import AskModel from "../components/AskModel.vue";
+import AskModel from "../components/QuickScore.vue";
 import ListItemActions from "../components/ListItemActions.vue";
 import RichTextEditor from "../components/RichTextEditor.vue";
 import SidebarFooter from "../components/SidebarFooter.vue";

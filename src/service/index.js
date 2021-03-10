@@ -6,6 +6,7 @@ if (process.server) {
   config.baseURL = `http://${process.env.HOST || "localhost"}:${process.env
     .PORT || 3000}`;
 }
+// config.baseURL='http://localhost:3000/comment_platform';
 
 const service = axios.create(config);
 

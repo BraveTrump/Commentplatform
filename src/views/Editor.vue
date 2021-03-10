@@ -21,8 +21,8 @@
 <script>
 import EditorHeader from "../components/EditorHeader.vue";
 import RichTextEditor from "../components/RichTextEditor.vue";
-//import request from "@/service";
-//import { getCookies } from "@/lib/utils";
+import request from "@/service";
+import { getCookies } from "@/lib/utils";
 import { imgDec } from "@/lib/config.js";
 
 export default {
@@ -31,7 +31,7 @@ export default {
     return {
       name: "",
       id: 0,
-      isLogin: true,
+      isLogin: false,
       title: "", // 标题
       content: "", // 富文本
       contentText: "", // 纯文本
@@ -52,7 +52,7 @@ export default {
         if (res.data.status === 200) {
           this.name = res.data.data.userName;
           this.id = res.data.data.userID;
-          this.isLogin = false;
+          this.isLogin = true;
         } else {
           this.$router.push({ name: "signup" });
           this.isLogin = false;
@@ -93,8 +93,8 @@ export default {
             this.$message.error(res.data.message);
           }
         });
-    }
-    /*async getArticleInfo() {
+    },
+    async getArticleInfo() {
       await request
         .get("/articles", {
           articleId: this.$route.params.articleId
@@ -132,7 +132,7 @@ export default {
             });
           }
         });
-    }*/
+    }
   }
 };
 </script>

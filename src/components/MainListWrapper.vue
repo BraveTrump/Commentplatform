@@ -1,20 +1,84 @@
 <template>
   <div>
     <main-list-nav :type="type" />
-
-    <el-card>
-      <div class="card-content">
-        <!-- <router-view></router-view> -->
-        <router-view
-          v-for="(item, index) in fakeInfo"
-          :key="index"
-          :item="item"
-          :index="index"
-          :type="item.type"
-          :showPart="['title']"
-        />
-      </div>
-    </el-card>
+    <div v-show="showCourse">
+      <el-col>
+        <el-row :span="8" v-for="item in courseInfo" :key="item.name">
+          <el-card :body-style="{ padding: '0px' }">
+            <div style="padding: 14px;">
+              <el-row>
+                <el-col :span="20" class="courseCardTitle">
+                  {{ item.name }}</el-col
+                >
+                <el-col :span="4" class="courseCardScore">{{
+                  item.score
+                }}</el-col>
+              </el-row>
+              <el-divider></el-divider>
+              <span>{{ item.content }}</span>
+            </div>
+          </el-card>
+        </el-row>
+      </el-col>
+    </div>
+    <div v-show="!showCourse">
+      <el-col>
+        <el-row
+          :span="8"
+          v-for="item in articleInfo"
+          :key="item"
+          :offset="index > 0 ? 2 : 0"
+        >
+          <el-card :body-style="{ padding: '0px' }">
+            <div style="padding: 14px;">
+              <el-row>
+                <el-col :span="20" class="courseCardTitle">{{
+                  item.title
+                }}</el-col>
+              </el-row>
+              <el-row
+                >作者：<span>{{ item.author }}</span></el-row
+              >
+              <span>{{ item.content }}</span>
+            </div>
+            <div style="padding: 14px">
+              <div class="actions">
+                <el-button
+                  size="small"
+                  type="primary"
+                  icon="el-icon-caret-top"
+                  @click="updateStatus('voteUp')"
+                >
+                  赞同 {{ item.voteUp }}
+                </el-button>
+                <el-button
+                  size="small"
+                  type="primary"
+                  icon="el-icon-caret-bottom"
+                  @click="updateStatus('voteDown')"
+                ></el-button>
+                <el-button
+                  class="btn-text-gray m-l-25"
+                  size="medium"
+                  type="text"
+                  @click="displayComments"
+                >
+                  <span class="el el-icon-comment"></span>{{ item.comment }}评论
+                </el-button>
+                <el-button
+                  class="btn-text-gray m-l-25"
+                  size="medium"
+                  type="text"
+                  icon="el-icon-star-on"
+                >
+                  收藏
+                </el-button>
+              </div>
+            </div>
+          </el-card>
+        </el-row>
+      </el-col>
+    </div>
   </div>
 </template>
 
@@ -27,15 +91,17 @@ export default {
   data() {
     return {
       type: "main",
-      fakeInfo: [],
-      loading: false
+      courseInfo: [],
+      articleInfo: [],
+      loading: false,
+      showCourse: false
     };
   },
   watch: {
     $route: "fetchData"
   },
   beforeMounted() {
-    this.fakeInfo = []; // 解决 home 和 hot 按钮之间切换时，由于数据结构不一致导致的报错
+    this.Info = []; // 解决 home 和 hot 按钮之间切换时，由于数据结构不一致导致的报错
   },
   mounted() {
     this.fetchData();
@@ -43,13 +109,15 @@ export default {
   methods: {
     fetchData() {
       this.loading = true;
-      this.fakeInfo = [];
+      this.Info = [];
       if (this.$route.name === "home") {
         this.getNormalList();
         this.loading = false;
+        this.showCourse = false;
       } else if (this.$route.name === "hot") {
-        this.getHotList();
+        this.getCourseList();
         this.loading = false;
+        this.showCourse = true;
       } else {
         this.getNormalList();
         this.loading = false;
@@ -58,22 +126,15 @@ export default {
     async getNormalList() {
       await request.get("/articles/list").then(res => {
         if (res.data.status === 200) {
-          this.fakeInfo = res.data.list;
+          this.Info = res.data.list;
         }
       });
     },
-    async getHotList() {
-      await request
-        .get("/hot-list-web", {
-          limit: 50,
-          desktop: true
-        })
-        .then(res => {
-          if (res.status === 200) {
-            this.fakeInfo = [];
-            this.fakeInfo = res.data.data;
-          }
-        });
+    getCourseList() {
+      this.courseInfo = [
+        { name: "OS", score: "4.6", content: "666" },
+        { name: "Java", score: "4.3", content: "牛逼" }
+      ];
     }
   }
 };
